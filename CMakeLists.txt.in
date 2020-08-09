@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.17)
+project(live555-download NONE)
+
+include(ExternalProject)
+#set(live555_prefix_dir ${CMAKE_CURRENT_BINARY_DIR}/live555-src)
+#set(live555_prefix_src_dir ${live555_prefix_dir}/src/live555)
+ExternalProject_Add(live555
+        URL http://www.live555.com/liveMedia/public/live555-latest.tar.gz
+        SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/live555-src
+        BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/live555-src
+        INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/live555-build
+        CONFIGURE_COMMAND ./genMakefiles linux-64bit
+        INSTALL_COMMAND make install PREFIX=<INSTALL_DIR>
+        )
